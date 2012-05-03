@@ -49,11 +49,127 @@ xrightmargin=-1.5cm
 
 %     \lstinputlisting{./praktikum6.sce}
 
+%---------------------------------------------------------------------
+%---------------------------------------------------------------------
+%---------------------------------------------------------------------
+
+\section{Vorbereitung}
+\begin{quote}
+    
+    \subsection{Tiefpassfilter 2. Ordnung}
+    \begin{quote}
+        
+        Um die Dämpfung bestimmen zu können muss zunächst das $U_{LSB}$ errechnet werden:
+        \begin{equation}
+    	\begin{split}
+    		U_{LSB} = \frac{14V}{2^{10} - 1 Bit} = \frac{14V}{1023 Bit}
+    	\end{split}
+        \end{equation}
+        
+        Die Dämpfung ergibt sich nun daraus, dass, aber der Grenzfrequenz, die Maximale Eingangsspannung von $\pm 7V$ auf unter $U_{LSB}$ gedämpft
+        werden muss.
+        Daraus folgt:
+        
+        
+        \begin{equation}
+    	\begin{split}
+    		A = \frac{14}{7} \p \frac{1}{1023} = \frac{2}{1023} = -27,1 dB
+    	\end{split}
+        \end{equation}
+        
+        
+        Nun simulieren wir einen Butterworth-Tiefpass 2. Ordnung und lesen ab, ab felcher Frequenz die Amplitude unter $-27,1 dB$ sinkt.
+        
+        %2 Grafiken:
+        \begin{center}
+        \vspace{-1.5cm}
+        \begin{tabular}{ll}
+        
+        \hspace{-4.5cm}
+            \begin{minipage}{0.6\textwidth}
+                
+                \begin{figure}[H]
+                    \label{fig:butter_2} 
+                    \includegraphics[scale=0.7, trim = 3.5cm 7cm 3.5cm 7cm, clip]{Bilder/butter_2} %FIXME [width=640px, height=474px]
+                    \caption{Butterworth Filter 2. Ordn.}
+                \end{figure}
+
+            \end{minipage}
+        
+            \begin{minipage}{0.6\textwidth}
+                \begin{figure}[H]
+                    \label{fig:butter_2}
+                    \includegraphics[scale=0.7, trim = 3.5cm 7cm 3.5cm 7cm, clip]{Bilder/butter_2_zoom} %FIXME [width=640px, height=474px]
+                    \caption{In die Grafik des Filters hineingezoomt}
+                \end{figure}
+            \vspace{-0.4cm}
+                                    
+            \end{minipage}
+        
+        \end{tabular}
+        \end{center}
+            
+        \vspace{1.5 cm}    
+        Daraus folgt, dass $f \approx 14,8 kHz$.\\
+        Da $f_0 < 2 \p f$ sein muss, ist die mindestabtastrate:\\
+         
+        \begin{equation}
+    	\begin{split}
+            f_0 \approx 2 \p 14,8 kHz = 29,6 kHz
+    	\end{split}
+        \end{equation}
+    \end{quote}
 
 
-%---------------------------------------------------------------------
-%---------------------------------------------------------------------
-%---------------------------------------------------------------------
+
+    \subsection{Tiefpassfilter 2. Ordnung}
+    \begin{quote}
+        
+        Die Vorgehensweise beim Tiefpass 8. ordnung ist analog.
+        
+        
+        %2 Grafiken:
+        \begin{center}
+        \vspace{-1.5cm}
+                
+        \end{center}
+        \begin{tabular}{ll}
+        
+        \hspace{-4.5cm}
+            \begin{minipage}{0.6\textwidth}
+                
+                \begin{figure}[H]
+                    \label{fig:butter_2} 
+                    \includegraphics[scale=0.7, trim = 3.5cm 7cm 3.5cm 7cm, clip]{Bilder/butter_8} %FIXME [width=640px, height=474px]
+                    \caption{Butterworth Filter 2. Ordn.}
+                \end{figure}
+
+            \end{minipage}
+        
+            \begin{minipage}{0.6\textwidth}
+                \begin{figure}[H]
+                    \label{fig:butter_2}
+                    \includegraphics[scale=0.7, trim = 3.5cm 7cm 3.5cm 7cm, clip]{Bilder/butter_8_zoom} %FIXME [width=640px, height=474px]
+                    \caption{In die Grafik des Filters hineingezoomt}
+                \end{figure}
+            \vspace{-0.4cm}
+                                    
+            \end{minipage}
+        
+        \end{tabular}
+        \end{center}
+    \end{quote}
+
+    \begin{equation}
+    \begin{split}
+        f_0 \approx 2 \p 4,6 kHz = 9,2 kHz
+    \end{split}
+    \end{equation}
+    
+
+    
+\end{quote}
+
 
 
 
