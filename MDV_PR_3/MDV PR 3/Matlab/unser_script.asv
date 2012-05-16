@@ -1,0 +1,40 @@
+%a=ucAnalogRead('COM14', 15000, 2000, 'NONE', 0)
+%load a;
+b=Code2Volt(a);
+%[val,min_ind]=min(b);
+%[val,max_ind]=max(b);
+%c=b(min_ind:max_ind);
+%t=[min_ind:1:max_ind];
+%plot(t,c,'*');
+%n=polyfit(t',c,1);
+%d=polyval(n,t')
+%plot(t',c,'*',t',d,'r-')
+
+%Steigung
+
+%m=(c(250)-c(200))/(250-200);
+%Mitte_ind=length(c)/2;
+%of=c(Mitte_ind);
+
+%Differenzsignal
+%r=c-d;
+
+%Effektivwert des Rauschens
+%r_eff=sqrt(mean(r.^2));
+
+%Effektivwert des Signals
+%c_eff=sqrt(mean(c.^2));
+b_eff=sqrt(mean(b.^2));
+
+%Plot des Rauschens
+%figure(2);
+%plot(t,r)
+
+%Berech
+%SNR=20*log(c_eff/r_eff);
+
+%Amplitudengang des Tiefpassfilters
+f=[5 1000 1250 1500 1750 2000 3000 3500 4000 4500 5000 5500 6000 6500 7000 8000 9000 10000];
+H=[4.5827 4.5599 4.4335 4.1968 3.8557 3.3739 1.3839 0.7583 0.3883 0.2162 0.1333 0.1035 0.0941 0.0903 0.0915 0.0915 0.0930 0.0933]./15;
+Amp= 20*log(H);
+semilogx(f,Amp)

@@ -3,14 +3,13 @@
 \newcommand{\veranstaltung}{Praktikum Messdatenverarbeitung}
 \newcommand{\pdfautor}{Dirk Babendererde (321 836), Thomas Kapa (325 219), Magdalene Busuru (319 433)}
 \newcommand{\autor}{Dirk Babendererde (321 836)\\ Thomas Kapa (325 219)\\ Magdalene Busuru (319 433)}
-\newcommand{\pdftitle}{Praktikum Messdatenverarbeitung Termin 1}
-\newcommand{\prototitle}{Praktikum Messdatenverarbeitung \\ Termin 1}
+\newcommand{\pdftitle}{Praktikum Messdatenverarbeitung Termin 3}
+\newcommand{\prototitle}{Praktikum Messdatenverarbeitung \\ Termin 3}
 \newcommand{\aufgabe}{}
 
 
 \newcommand{\gruppe}{Gruppe: G2 Fr 08-10}
 \newcommand{\betreuer}{Betreuer: J\"urgen Funk}
-
 
 
 \input{../../../packages/tu_header_8}
@@ -19,18 +18,43 @@
 
 % \lstlistoflistings
 \definecolor{darkgray}{rgb}{0.95,0.95,0.95}
-\lstset{language=Scilab}
-\lstset{inputencoding=utf8}
-%\lstset{extendedchars=true} % Umlaute an der richtigen stelle und nicht am Anfang ausgeben
-\lstset{backgroundcolor=\color{darkgray}}
-\lstset{numbers=left, numberstyle=\tiny, stepnumber=1, numbersep=7pt, breaklines=true}
-\lstset{keywordstyle=\color{red}\bfseries\emph}
+\definecolor{darkolivegreen}{HTML}{01a801}
+\definecolor{functionsBlue}{HTML}{32b9b9}
+\definecolor{variableRed}{rgb}{1,0,0}
+\definecolor{stringBrown}{HTML}{bc8e8e} % f geht nicht
+
 \lstset{
-breaklines,
-numbers=left,
-frame=single,
-xleftmargin=-2cm,
-xrightmargin=-1.5cm
+        %\lstset{extendedchars=true} % Umlaute an der richtigen stelle und nicht am Anfang ausgeben
+        %basicstyle=\footnotesize\ttfamily,
+        basicstyle=\small,
+        %
+        inputencoding=utf8,
+        %
+        tabsize=4,
+        showspaces=false,
+        showtabs=false,
+        showstringspaces=true, % no special string spaces
+        %
+        backgroundcolor=\color{darkgray}, % background
+        stringstyle=\color{stringBrown}\fseries, % Strings
+        keywordstyle=\color{functionsBlue}\bfseries, % keywords Blau
+        identifierstyle=\color{variableRed}, % variablen
+        commentstyle=\color{darkolivegreen}, %  comments
+        %
+        breaklines=true,
+        %
+        numbers=left,
+        numberstyle=\tiny,
+        stepnumber=1,
+        numbersep=7pt,
+        %
+        frame=single,
+        columns=flexible,
+        %
+        xleftmargin=-2cm,
+        xrightmargin=-1.5cm,
+        %
+        language=Matlab,
 }
 % enables UTF-8 in source code: (dirty, dirty hack)
 \lstset{literate=
@@ -81,19 +105,19 @@ Abtast- und Haltglied und ADU sitzen auf dem Microcontroller.
     	\end{split}
         \end{equation}
         
-        Die Dämpfung ergibt sich nun daraus, dass, aber der Grenzfrequenz, die Maximale Eingangsspannung von $\pm 7V$ auf unter $U_{LSB}$ gedämpft
-        werden muss.
-        Daraus folgt:
+        Die Dämpfung ergibt sich nun daraus, dass ab der Grenzfrequenz die Maximale Eingangsspannung von $\pm 7V$ auf unter
+        $U_{LSB}/2$ gedämpft werden muss:
         
         
         \begin{equation}
     	\begin{split}
-    		A = \frac{14}{7} \p \frac{1}{1023} = \frac{2}{1023} = -27,1 dB
+    		A = \frac{14}{7 \p 2} \p \frac{1}{1023} = \frac{1}{1023} = -60 dB
     	\end{split}
         \end{equation}
         
         
-        Nun simulieren wir einen Butterworth-Tiefpass 2. Ordnung und lesen ab, ab felcher Frequenz die Amplitude unter $-27,1 dB$ sinkt.
+        Nun simulieren wir einen Butterworth-Tiefpass 2. Ordnung und lesen ab, bei welcher Frequenz die Amplitude unter $-60 dB$
+        sinkt.
         
         %2 Grafiken:
         \begin{center}
@@ -125,19 +149,20 @@ Abtast- und Haltglied und ADU sitzen auf dem Microcontroller.
         \end{center}
             
         \vspace{1.5 cm}    
-        Daraus folgt, dass $f \approx 14,8 kHz$.\\
-        Da $f_0 < 2 \p f$ sein muss, ist die mindestabtastrate:\\
+        Daraus folgt, dass $f \approx 100 kHz$.\\
+        Da $f_0 < 2 \p f$ sein muss, ist die Mindestabtastrate:\\
          
         \begin{equation}
     	\begin{split}
-            f_0 \approx 2 \p 14,8 kHz = 29,6 kHz
+            f_0 \approx 2 \p 100 kHz = 200 kHz
     	\end{split}
         \end{equation}
     \end{quote}
 
 
 
-    \subsection{Tiefpassfilter 2. Ordnung}
+
+    \subsection{Tiefpassfilter 8. Ordnung}
     \begin{quote}
         
         Die Vorgehensweise beim Tiefpass 8. ordnung ist analog.
@@ -159,8 +184,9 @@ Abtast- und Haltglied und ADU sitzen auf dem Microcontroller.
                     \caption{Butterworth Filter 2. Ordn.}
                 \end{figure}
 
+
             \end{minipage}
-        
+            
             \begin{minipage}{0.6\textwidth}
                 \begin{figure}[H]
                     \label{fig:butter_2}
@@ -168,7 +194,7 @@ Abtast- und Haltglied und ADU sitzen auf dem Microcontroller.
                     \caption{In die Grafik des Filters hineingezoomt}
                 \end{figure}
             \vspace{-0.4cm}
-                                    
+            
             \end{minipage}
         
         \end{tabular}
@@ -177,12 +203,102 @@ Abtast- und Haltglied und ADU sitzen auf dem Microcontroller.
 
     \begin{equation}
     \begin{split}
-        f_0 \approx 2 \p 4,6 kHz = 9,2 kHz
+        f_0 \approx 2 \p 7,3 kHz = 14,6 kHz
     \end{split}
     \end{equation}
+    
+    
+    Mit diesem Tiefpass müssten wir mit mindestens $14,6 kHz$ abtasten. Da wir in diesem Versuch aber nur eine
+    Spektralanalyse bis maximal $f_m = 2 kHz$ durchführen möchten, stören uns Aliasingeffekte über $2 kHz$ nicht, weshalb
+    es genügt mit $6 kHz$ ab zu tasten.
+    
+    
     
 
     
 \end{quote}
+
+
+
+\section{Praxisteil}
+\begin{quote}
+    
+    \subsection{Ineare Regression, Steigung und Offset der ADU-Kennlinie}
+    \begin{quote}
+        
+        \begin{figure}[H]
+        \centering
+            \includegraphics[scale=0.7, trim = 30mm 90mm 30mm 90mm, clip]{Bilder/ADUKennlinieplusRegr_V}
+                \caption{ADU-Kennlinie + Regressionsgerade}
+                \label{fig:ADUKennlinieplusRegr}
+        \end{figure}
+        
+        Der Offset beträgt $-0.0959 V$ und die Steigung ist $0.0367$.
+        
+        
+    \end{quote}
+
+
+    \subsection{Rauschen}
+    \begin{quote}
+        
+        \begin{figure}[H]
+        \centering
+            \includegraphics[scale=0.7, trim = 30mm 90mm 30mm 90mm, clip]{Bilder/Rauschen}
+                \caption{Rauschen}
+                \label{fig:Rauschen}
+        \end{figure}
+        
+        Der Effektivwert des Rauschens ist $ 0.0091 V$. Das Singal- zu Rauschverhältnis beträgt $121.5515$.
+        
+    \end{quote}
+
+
+    
+    \subsection{Amplitdenfrequenzgang des Antialiasing-Filters}
+    \begin{quote}
+        
+        \begin{figure}[H]
+        \centering
+            \includegraphics[scale=0.9, trim = 30mm 90mm 30mm 90mm, clip]{Bilder/realer_filter}
+                \caption{Amplitdenfrequenzgang des Antialiasing-Filters}
+                \label{fig:Rauschen}
+        \end{figure}
+        
+        
+        Der Amplitudenfrequenzgang des realen Filters weicht an einigen Stellen von dem des simulierten, idealen ab.\\
+        Der Amplitudengang startet nicht bei $0 bB$, da in der Leitung und im Filter Verluste entstehen.\\
+        Außerdem knickt der Reale Filter nicht so abrupt ab sondern hat einen weicheren Verlauf, was auf die nicht idealen
+        Bauteileigenschaften zurückzuführen ist. Aus dem selben Grund ist die Steigung nicht ganz so steil wie in der
+        Simulation.\\
+        Schließlich wird die Dämpfung nicht unendliche groß, da der ADU sehr kleine Spannungen nicht mehr auflösen kann.
+        
+    \end{quote}
+
+    
+    
+\end{quote}
+
+
+\subsection{Matlab-Code}
+    \begin{quote}
+        
+        \lstinputlisting[
+            caption={Matlab-script},
+            label=lst:Matlab]
+            {./Matlab/unser_script.m}
+            
+            \lstinputlisting[
+            caption={Matlab-script},
+            label=lst:Matlab]
+            {./Matlab/Code2Volt.m}
+
+
+    \end{quote}
+
+
+
+
+
 
 \end{document}
